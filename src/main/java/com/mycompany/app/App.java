@@ -15,15 +15,26 @@ public class App
 {
     
 
-    public static boolean search(ArrayList<Integer> array, int e) {
-        System.out.println("inside search");
-        if (array == null) return false;
-  
-        for (int elt : array) {
-          if (elt == e) return true;
-        }
-        return false;
-      }
+
+
+public static boolean search(String array[], String s, int number){
+	int count=0;
+	if(array==null||s==null||number<1) 
+		return false;
+	
+	for (String str : array){
+		if(s.equalsIgnoreCase(str)){
+			count++;			
+		}
+	}
+
+	if(count==number)
+		return true;
+	
+
+	return false;
+	
+}
 
 
        public static void main(String[] args) {
@@ -38,19 +49,25 @@ public class App
           String input1 = req.queryParams("input1");
           java.util.Scanner sc1 = new java.util.Scanner(input1);
           sc1.useDelimiter("[;\r\n]+");
-          java.util.ArrayList<Integer> inputList = new java.util.ArrayList<>();
+          
+	
+	String[] inputList = new String[20];
+	int i=0;
           while (sc1.hasNext())
           {
-            int value = Integer.parseInt(sc1.next().replaceAll("\\s",""));
-            inputList.add(value);
+	    inputList[i]=sc1.next().replaceAll("\\s","");
+            i++;
           }
           System.out.println(inputList);
 
 
           String input2 = req.queryParams("input2").replaceAll("\\s","");
-          int input2AsInt = Integer.parseInt(input2);
+         
 
-          boolean result = App.search(inputList, input2AsInt);
+	  String input3 = req.queryParams("input3").replaceAll("\\s","");
+          int input3AsInt = Integer.parseInt(input3);
+
+          boolean result = App.search(inputList, input2, input3AsInt);
 
          Map map = new HashMap();
           map.put("result", result);
